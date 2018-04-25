@@ -67,11 +67,12 @@ public class FileManagerForm {
 	JButton btnf1 = new JButton(ButtonNames.ftpName);
 	JButton btnf2 = new JButton(ButtonNames.driveName);
 	JButton btnf3 = new JButton(ButtonNames.openName);
-	JButton btnf4 = new JButton(ButtonNames.renameName);
+	JButton btnf4 = new JButton(ButtonNames.editName);
 	JButton btnf5 = new JButton(ButtonNames.copyName);
 	JButton btnf6 = new JButton(ButtonNames.moveName);
 	JButton btnf7 = new JButton(ButtonNames.newFolderName);
 	JButton btnf8 = new JButton(ButtonNames.deleteName);
+	JButton btnf9 = new JButton(ButtonNames.renameName);
 
 	FileManagerForm() {
 		listeners.setProcessForm(this);
@@ -110,32 +111,54 @@ public class FileManagerForm {
 				listeners.changeDrive(listeners.getpForm().getCurrentTree());
 			}
 		});
+		
 		btnPnl.add(btnf3, BorderLayout.SOUTH);
+		btnf3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (listeners.getpForm().getCurrentTree() != null) {
+					listeners.openFile(listeners.getpForm().getCurrentTree());
+				} else {
+					listeners.openFile();
+				}
+			}
+		});
+		
 		btnPnl.add(btnf4, BorderLayout.SOUTH);
+		btnf4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listeners.editFile(listeners.getpForm().getCurrentTree());
+			}
+		});
+		
 		btnPnl.add(btnf5, BorderLayout.SOUTH);
 		btnf5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listeners.copyDir(listeners.getpForm().getCurrentTree());
 			}
 		});
+		
 		btnPnl.add(btnf6, BorderLayout.SOUTH);
 		btnf6.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listeners.moveDir(listeners.getpForm().getCurrentTree());
 			}
 		});
+		
 		btnPnl.add(btnf7, BorderLayout.SOUTH);
 		btnf7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listeners.makeDir();
 			}
 		});
+		
 		btnPnl.add(btnf8, BorderLayout.SOUTH);
 		btnf8.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				listeners.deleteDir(listeners.getpForm().getCurrentTree());
 			}
 		});
+		
+		btnPnl.add(btnf9, BorderLayout.SOUTH);
 		frame.add(btnPnl, BorderLayout.SOUTH);
 
 		splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollpane1, scrollpane2);

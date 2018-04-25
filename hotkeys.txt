@@ -5,8 +5,9 @@ Double click to open file/folder.
 F1 - Set up a new FTP connection
 F2 - Choose one from existing drives
 F3 - View file (only txt)
-F4 - Rename file
+F4 - Edit file (only txt)
 F5 - Copy file
 F6 - Move file
 F7 - New folder
 F8 - Delete file
+F9 - Rename file

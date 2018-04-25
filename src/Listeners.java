@@ -78,7 +78,7 @@ public class Listeners {
 			
 	}
 
-	// F3, F4 function
+	// F3
 	public void openFile(String pathString) {
 		Desktop desktop = null;
 		if (Desktop.isDesktopSupported()) {
@@ -632,30 +632,10 @@ public class Listeners {
 
 			if (key.getKeyCode() == KeyEvent.VK_F2)
 				changeDrive(currTree);
-
 			else if (key.getKeyCode() == KeyEvent.VK_F3) {
-				TreePath tp = currTree.getSelectionPath();
-				File tf = new File(getTreePath(tp, File.pathSeparator));
-				if ((tp != null) && (tf.isFile())) {
-					setEditor(pForm.getNutPad());
-					nutpad.setWorkFile(tf);
-					String url = tf.getAbsolutePath();
-					if (!isBinary(url)) {
-						nutpad.openWorkFile(false);
-					}
-				}
+				openFile(currTree);
 			} else if (key.getKeyCode() == KeyEvent.VK_F4) {
-				TreePath tp = currTree.getSelectionPath();
-				File tf = new File(getTreePath(tp, File.pathSeparator));
-				if ((tp != null) && (tf.isFile())) {
-					setEditor(pForm.getNutPad());
-					nutpad.setWorkFile(tf);
-					String url = tf.getAbsolutePath();
-					if (!isBinary(url)) {
-						nutpad.openWorkFile(true);
-					}
-				}
-
+				editFile(currTree);
 			} else if (key.getKeyCode() == KeyEvent.VK_F5) {
 				copyDir(currTree);
 			} else if (key.getKeyCode() == KeyEvent.VK_F6) {
@@ -897,6 +877,32 @@ public class Listeners {
 			System.err.println("Copy folder failed");
 		}
 		updateTrees();
+	}
+	
+	public void editFile(JTree currTree){
+		TreePath tp = currTree.getSelectionPath();
+		File tf = new File(getTreePath(tp, File.pathSeparator));
+		if ((tp != null) && (tf.isFile())) {
+			setEditor(pForm.getNutPad());
+			nutpad.setWorkFile(tf);
+			String url = tf.getAbsolutePath();
+			if (!isBinary(url)) {
+				nutpad.openWorkFile(true);
+			}
+		}
+	}
+	
+	public void openFile(JTree currTree){
+		TreePath tp = currTree.getSelectionPath();
+		File tf = new File(getTreePath(tp, File.pathSeparator));
+		if ((tp != null) && (tf.isFile())) {
+			setEditor(pForm.getNutPad());
+			nutpad.setWorkFile(tf);
+			String url = tf.getAbsolutePath();
+			if (!isBinary(url)) {
+				nutpad.openWorkFile(false);
+			}
+		}
 	}
 
 }
